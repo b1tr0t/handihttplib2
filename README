@@ -1,0 +1,1 @@
+Minor fix for multi set-cookie: statements in http headers.  This allows a FixedCookie from http://bugs.python.org/issue3073 to correctly read in cookies. Nice!  
