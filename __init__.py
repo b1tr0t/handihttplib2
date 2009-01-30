@@ -8,6 +8,7 @@ to conserve bandwidth.
 Requires Python 2.3 or later
 
 Changelog:
+2009-01-29, Peter: fixed lame broken multiple Set-Cookie cookies.  WTF.  Does nobody else on this planet need to deal with cookies? 
 2007-08-18, Rick: Modified so it's able to use a socks proxy if needed.
 
 """
@@ -191,8 +192,8 @@ def safename(filename):
     return ",".join((filename, filemd5))
 
 NORMALIZE_SPACE = re.compile(r'(?:\r\n)?[ \t]+')
-def _normalize_headers(headers):
-    return dict([ (key.lower(), NORMALIZE_SPACE.sub(value, ' ').strip())  for (key, value) in headers.iteritems()])
+def _normalize_headers(headers):  ## Some headers SHOULD CONTAIN CAPITALS AS PER RFC!!!!!!!!!!!! 
+    return dict([ (key, NORMALIZE_SPACE.sub(value, ' ').strip())  for (key, value) in headers.iteritems()])
 
 def _parse_cache_control(headers):
     retval = {}
