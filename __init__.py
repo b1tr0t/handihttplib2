@@ -66,7 +66,7 @@ __all__ = ['Http', 'Response', 'ProxyInfo', 'HttpLib2Error',
 
 
 # The httplib debug level, set to a non-zero value to get debug output
-debuglevel = 0
+debuglevel = 1
 
 # Python 2.3 support
 if sys.version_info < (2,4):
@@ -941,9 +941,10 @@ a string that contains the response entity body.
             if headers is None:
                 headers = {}
             else:
-                headers = _normalize_headers(headers)
+                pass
+                #headers = _normalize_headers(headers)
 
-            if not headers.has_key('user-agent'):
+            if not headers.has_key('User-Agent'):
                 headers['user-agent'] = "Python-httplib2/%s" % __version__
 
             uri = iri2uri(uri)
