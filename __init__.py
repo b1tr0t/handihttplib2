@@ -66,7 +66,7 @@ __all__ = ['Http', 'Response', 'ProxyInfo', 'HttpLib2Error',
 
 
 # The httplib debug level, set to a non-zero value to get debug output
-debuglevel = 1
+debuglevel = 0
 
 # Python 2.3 support
 if sys.version_info < (2,4):
@@ -916,7 +916,7 @@ the same interface as FileCache."""
 # including all socket.* and httplib.* exceptions.
 
 
-    def request(self, uri, method="GET", body=None, headers=None, redirections=DEFAULT_MAX_REDIRECTS, connection_type=None):
+    def request(self, uri, method="GET", body=None, headers=None, redirections=DEFAULT_MAX_REDIRECTS, connection_type=None, debug=False):
         """ Performs a single HTTP request.
 The 'uri' is the URI of the HTTP resource and can begin 
 with either 'http' or 'https'. The value of 'uri' must be an absolute URI.
@@ -937,6 +937,12 @@ The return value is a tuple of (response, content), the first
 being and instance of the 'Response' class, the second being 
 a string that contains the response entity body.
         """
+        global debuglevel
+        if debug:
+            debuglevel = 1
+        else:
+            debuglevel = 0
+
         try:
             if headers is None:
                 headers = {}
